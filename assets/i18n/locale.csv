@@ -1,0 +1,10 @@
+keys,en,fr
+INTERACTION_TALK,Talk,Parler
+CHARACTER_NAME_MOM,Mom,Maman
+CHARACTER_NAME_DOG,Dog,Chien
+CHARACTER_NAME_POLICE,Police,Police
+CHARACTER_NAME_BARMAN,Barman,Barman
+CHARACTER_NAME_MANAGER,Manager,Gérant
+DIALOGUE_MOM_01,"Don't even think about coming home. You were here yesterday, I have nothing to give you. Go away!","Ne pense même pas à rentrer. Tu es déjà venue hier, je n'ai rien à te donner. Pars !"
+DIALOGUE_DOG_01,"Woof woof !","Ouf ouf !"
+DIALOGUE_MOM_02,"...","..."

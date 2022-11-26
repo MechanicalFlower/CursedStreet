@@ -1,0 +1,60 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialogue_manager/dialogue_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+resource_version = 37
+syntax_version = 2
+raw_text = "~ first_visit
+
+CHARACTER_NAME_MOM: Don't even think about coming home. You were here yesterday, I have nothing to give you. Go away! [TR:DIALOGUE_MOM_01]
+CHARACTER_NAME_DOG: Woof woof ! [TR:DIALOGUE_DOG_01]
+
+~ other
+
+CHARACTER_NAME_MOM: ... [TR:DIALOGUE_MOM_02]"
+errors = [  ]
+titles = {
+"first_visit": "2",
+"other": "7"
+}
+lines = {
+"0": {
+"next_id": "2",
+"text": "first_visit",
+"type": "title"
+},
+"2": {
+"character": "CHARACTER_NAME_MOM",
+"character_replacements": [  ],
+"next_id": "3",
+"replacements": [  ],
+"text": "Don't even think about coming home. You were here yesterday, I have nothing to give you. Go away!",
+"translation_key": "DIALOGUE_MOM_01",
+"type": "dialogue"
+},
+"3": {
+"character": "CHARACTER_NAME_DOG",
+"character_replacements": [  ],
+"next_id": "",
+"replacements": [  ],
+"text": "Woof woof !",
+"translation_key": "DIALOGUE_DOG_01",
+"type": "dialogue"
+},
+"5": {
+"next_id": "7",
+"text": "other",
+"type": "title"
+},
+"7": {
+"character": "CHARACTER_NAME_MOM",
+"character_replacements": [  ],
+"next_id": "",
+"replacements": [  ],
+"text": "...",
+"translation_key": "DIALOGUE_MOM_02",
+"type": "dialogue"
+}
+}
