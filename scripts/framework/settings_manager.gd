@@ -6,17 +6,17 @@ signal value_changed(section, key)
 
 const SETTINGS_FILE_NAME := "user://settings.cfg"
 
+# Min volume dB
+const MIN_VOLUME_DB = -80.0
+
 # Each entry contains: section name, key name, default value
-const DEFAULT_VALUES := [
+var default_values := [
 	["graphics", "fullscreen_enabled", true],
 	["sound", "music_volume", 1.0],
 	["sound", "effects_volume", 1.0],
 	["controls", "mouse_sensitivity", 0.3],
 	["gui", "language", find_matching_loaded_locale()],
 ]
-
-# Min volume dB
-const MIN_VOLUME_DB = -80.0
 
 # If enabled, settings will be saved to file when changed
 var autosave := true
@@ -27,7 +27,7 @@ var _settings_file := ConfigFile.new()
 func _ready():
 	_settings_file.load(SETTINGS_FILE_NAME)
 
-	for entry in DEFAULT_VALUES:
+	for entry in default_values:
 		var section = entry[0]
 		var key = entry[1]
 		var value = entry[2]
@@ -137,7 +137,7 @@ func _set_volume_db(bus_name: String, volume: float) -> void:
 	volume slider reaches minimum.
 	"""
 	# Recalculate to <MIN_VOLUME_DB, 0>, non-linear
-	var volume_db = abs(MIN_VOLUME_DB) * sqrt(2 * volume - pow(volume, 2)) + M
+	var volume_db = abs(MIN_VOLUME_DB) * sqrt(2 * volume - pow(volume, 2)) + MIN_VOLUME_DB
 	var bus_id = AudioServer.get_bus_index(bus_name)
 	assert(bus_id != -1, "Invalid bus_name = " + bus_name)
 	AudioServer.set_bus_volume_db(bus_id, volume_db)
