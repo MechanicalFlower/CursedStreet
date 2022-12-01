@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/dialogues/font_normal.tres" type="DynamicFont" id=1]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 25.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="MarginContainer"]
+margin_top = 16.0
+margin_right = 345.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 1 )
+text = "Objectif: Trouver Maman"

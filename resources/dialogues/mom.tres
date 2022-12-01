@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-resource_version = 37
+resource_version = 38
 syntax_version = 2
 raw_text = "~ first_visit
 
@@ -13,7 +13,7 @@ CHARACTER_NAME_DOG: Woof woof ! [TR:DIALOGUE_DOG_01]
 
 ~ other
 
-CHARACTER_NAME_MOM: ... [TR:DIALOGUE_MOM_02]"
+CHARACTER_NAME_MOM: ..."
 errors = [  ]
 titles = {
 "first_visit": "2",
@@ -54,7 +54,7 @@ lines = {
 "next_id": "",
 "replacements": [  ],
 "text": "...",
-"translation_key": "DIALOGUE_MOM_02",
+"translation_key": "...",
 "type": "dialogue"
 }
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/models/Mailbox.material" type="Material" id=1]
-[ext_resource path="res://scripts/mailbox.gd" type="Script" id=2]
+[ext_resource path="res://scripts/interact_mailbox.gd" type="Script" id=2]
+[ext_resource path="res://scripts/mailbox.gd" type="Script" id=3]
 
 [sub_resource type="ArrayMesh" id=54]
 blend_shape_mode = 0
@@ -74,32 +75,46 @@ data = PoolVector3Array( 0, -0.014, 0.008, -0.0009, -0.014, 0.0077, -0.001, -0.0
 transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
 
 [node name="Post" type="MeshInstance" parent="."]
-transform = Transform( 100, 0, 4.54747e-13, 0, -3.57628e-05, 100, 0, -100, -3.57628e-05, 0, 0, 0 )
+transform = Transform( 100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0, 0, 0 )
 mesh = SubResource( 54 )
 skeleton = NodePath("")
+script = ExtResource( 3 )
 
-[node name="StaticBody" type="StaticBody" parent="Post"]
-transform = Transform( 1, 0, 3.55271e-15, 0, 1, 3.9968e-15, 3.55271e-15, 3.9968e-15, 1, 0, -0.00130001, 0.032 )
+[node name="Spatial" type="Spatial" parent="Post"]
+
+[node name="StaticBody" type="StaticBody" parent="Post/Spatial"]
+transform = Transform( 1, 0, 3.55271e-15, -2.52435e-29, 1, 3.55271e-15, 3.55271e-15, 3.55271e-15, 1, 0, -0.00130001, 0.032 )
 script = ExtResource( 2 )
+prompt_message = "INTERACTION_STEAL"
 
-[node name="MailboxMesh" type="MeshInstance" parent="Post/StaticBody"]
-transform = Transform( 1, 1.49012e-08, -7.10543e-15, -1.49012e-08, 1, 6.21725e-15, -1.06581e-14, -2.22045e-14, 1, 0, 7.45058e-09, 0 )
+[node name="MailboxMesh" type="MeshInstance" parent="Post/Spatial/StaticBody"]
+transform = Transform( 1, 1.49012e-08, -7.10543e-15, -1.49012e-08, 1, 3.55271e-15, -1.06581e-14, -2.13163e-14, 1, 0, 7.45058e-09, 0 )
 mesh = SubResource( 55 )
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="MailboxMeshLid" type="MeshInstance" parent="Post/StaticBody/MailboxMesh"]
+[node name="MailboxMeshLid" type="MeshInstance" parent="Post/Spatial/StaticBody/MailboxMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.014, 0 )
 mesh = SubResource( 56 )
 
-[node name="MailboxMeshFlag" type="MeshInstance" parent="Post/StaticBody/MailboxMesh"]
+[node name="MailboxMeshFlag" type="MeshInstance" parent="Post/Spatial/StaticBody/MailboxMesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.003, -0.0117, 0.004 )
 mesh = SubResource( 57 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Post/StaticBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Post/Spatial/StaticBody"]
 shape = SubResource( 58 )
 
-[node name="Camera" type="Camera" parent="Post/StaticBody"]
-transform = Transform( 0.02, -9.42801e-17, -2.32831e-10, -2.32831e-10, -7.15256e-09, -0.02, -2.22045e-16, 0.02, -7.15256e-09, 1.32349e-23, -0.0349365, 0.005 )
+[node name="PlayerPoint" type="Spatial" parent="."]
+unique_name_in_owner = true
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3.06, 3.624 )
+
+[node name="HeadPoint" type="Spatial" parent="PlayerPoint"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.64, 0 )
 
 [node name="Tween" type="Tween" parent="."]
 unique_name_in_owner = true
+
+[node name="ShakeTween" type="Tween" parent="."]
+unique_name_in_owner = true
+
+[connection signal="tween_completed" from="ShakeTween" to="Post" method="_on_ShakeTween_completed"]

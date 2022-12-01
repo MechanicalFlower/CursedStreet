@@ -1,3 +1,5 @@
+class_name PlayerHead
+
 extends Spatial
 
 export(NodePath) var cam_path := NodePath("Camera")
@@ -36,12 +38,24 @@ func _physics_process(delta: float) -> void:
 func camera_rotation() -> void:
 	# Horizontal mouse look.
 	rot.y -= mouse_axis.x * mouse_sensitivity
+	rot.y = fmod(rot.y, deg2rad(360))
 
 	if GameManager.game_mode == GameManager.GameMode.DETAILED_INTERACTION:
+#		rot.y = clamp(rot.y, )
 		pass
 	else:
 		# Vertical mouse look.
 		rot.x = clamp(rot.x - mouse_axis.y * mouse_sensitivity, -y_limit, y_limit)
 
+	get_owner().rotation.y = rot.y
+	
+	if GameManager.game_mode == GameManager.GameMode.DETAILED_INTERACTION:
+		pass
+	else:
+		rotation.x = rot.x
+
+
+func set_rot(new_rot: Vector3):
+	rot = new_rot
 	get_owner().rotation.y = rot.y
 	rotation.x = rot.x

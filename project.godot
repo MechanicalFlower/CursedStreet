@@ -14,12 +14,17 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogue_manager/dialogue_resource.gd"
 }, {
+"base": "Interactable",
+"class": "InteractMailbox",
+"language": "GDScript",
+"path": "res://scripts/interact_mailbox.gd"
+}, {
 "base": "StaticBody",
 "class": "Interactable",
 "language": "GDScript",
 "path": "res://scripts/interactable.gd"
 }, {
-"base": "Interactable",
+"base": "Spatial",
 "class": "Mailbox",
 "language": "GDScript",
 "path": "res://scripts/mailbox.gd"
@@ -28,12 +33,25 @@ _global_script_classes=[ {
 "class": "MovementController",
 "language": "GDScript",
 "path": "res://scripts/player/movement_controller.gd"
+}, {
+"base": "Spatial",
+"class": "PlayerHead",
+"language": "GDScript",
+"path": "res://scripts/player/head.gd"
+}, {
+"base": "Spatial",
+"class": "Train",
+"language": "GDScript",
+"path": "res://scripts/train.gd"
 } ]
 _global_script_class_icons={
 "DialogueResource": "",
+"InteractMailbox": "",
 "Interactable": "",
 "Mailbox": "",
-"MovementController": ""
+"MovementController": "",
+"PlayerHead": "",
+"Train": ""
 }
 
 [application]
@@ -59,7 +77,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogue_manager/plugin.cfg", "res://addons/zylann.scatter/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/brush/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg" )
 
 [global]
 
@@ -144,30 +162,6 @@ interact={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
- ]
-}
-crounch={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777238,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":9,"pressure":0.0,"pressed":false,"script":null)
- ]
-}
-shoot={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
- ]
-}
-zoom={
-"deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":6,"pressure":0.0,"pressed":false,"script":null)
- ]
-}
-reload={
-"deadzone": 0.5,
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":82,"unicode":0,"echo":false,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":1,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 

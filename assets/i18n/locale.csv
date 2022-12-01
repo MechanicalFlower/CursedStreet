@@ -1,10 +1,29 @@
 keys,en,fr
 INTERACTION_TALK,Talk,Parler
+INTERACTION_STEAL,Steal,Voler
+INTERACTION_KNOCK,Knock,Tocer
+CHARACTER_NAME_PLAYER,You,Toi
 CHARACTER_NAME_MOM,Mom,Maman
 CHARACTER_NAME_DOG,Dog,Chien
 CHARACTER_NAME_POLICE,Police,Police
 CHARACTER_NAME_BARMAN,Barman,Barman
 CHARACTER_NAME_MANAGER,Manager,Gérant
+CHARACTER_NAME_PNJ,???,???
 DIALOGUE_MOM_01,"Don't even think about coming home. You were here yesterday, I have nothing to give you. Go away!","Ne pense même pas à rentrer. Tu es déjà venue hier, je n'ai rien à te donner. Pars !"
-DIALOGUE_DOG_01,"Woof woof !","Ouf ouf !"
-DIALOGUE_MOM_02,"...","..."
+DIALOGUE_DOG_01,Woof woof !,Ouf ouf !
+DIALOGUE_MANAGER_01,We don't let people in without money!,On laisse pas rentrer les gens sans argent ici !
+DIALOGUE_BARMAN_01,"Can I get you anything?","Je te sers quelque chose ?"
+DIALOGUE_BARMAN_02,"You're just in time, I need you to bring me some mailboxes! It's for a personal business..."," Tu tombe bien, j'aurais besoin que tu me ramène des boites aux lettres ! C'est pour un buisness perso..."
+DIALOGUE_BARMAN_03,"Watch your back, cops are lurking around here. Come here to hide if you need to!","Fait attention à tes arrières, les flics rodent par ici. Viens ici pour te cacher si tu as besoin !"
+DIALOGUE_BARMAN_04,"After the effort, the comfort!","Après l'effort, le réconfort !"
+DIALOGUE_BARMAN_05,"You did deserve a little gift.","Tu as bien mèrité un petit cadeau."
+DIALOGUE_PNJ_01,"The guy doesn't even know where his mother lives, unworthy son *laugh*."," Le mec ne sait même pas ou sa mère habite, fils indigne *rire*"
+DIALOGUE_PNJ_02,"No *laugh*","Non *rire*"
+DIALOGUE_PLAYER_01,"No, I shouldn't get too close to them","Non, je ne devrais pas trop m'approcher d'eux"
+DIALOGUE_PLAYER_02,"No.","Non."
+DIALOGUE_PLAYER_03,"Do you know where I can find my mother?","Tu sais ou je peux trouver ma mère ?"
+DIALOGUE_PLAYER_04,"I'm broke. Do you know how I can make money?","Je suis a sec. Tu sais comment je peux me faire de l'argent ?"
+DIALOGUE_PLAYER_05,"Do you know how I can make money?","Tu sais comment je peux me faire de l'argent ?"
+DIALOGUE_PLAYER_06,"What should I do?","Je dois faire quoi ?"
+DIALOGUE_PLAYER_07,"Take.","Tiens."
+DIALOGUE_PLAYER_08,"It was the last.","C'était la dernière."

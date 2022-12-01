@@ -1,0 +1,9 @@
+~ find_mom
+
+CHARACTER_NAME_PLAYER: Do you know where I can find my mother ? [TR:DIALOGUE_PLAYER_03]
+CHARACTER_NAME_PNJ: The guy doesn't even know where his mother lives, unworthy son *laugh* [TR:DIALOGUE_PLAYER_01]
+
+=> END
+~ steal_mailbox
+CHARACTER_NAME_PLAYER: Do you know how I can make money ? [TR:DIALOGUE_PLAYER_05]
+CHARACTER_NAME_PNJ: No *laugh* [TR:DIALOGUE_PLAYER_02]

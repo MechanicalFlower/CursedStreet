@@ -17,6 +17,7 @@ func _physics_process(_delta):
 			prompt.set_text(detected.get_prompt())
 
 			if Input.is_action_just_pressed(detected.prompt_action):
+#				get_tree().set_input_as_handled()
 				detected.interact(owner)
 	else:
 		prompt.set_text("")

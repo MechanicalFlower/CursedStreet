@@ -1,0 +1,9 @@
+~ first_visit
+
+CHARACTER_NAME_MOM: Don't even think about coming home. You were here yesterday, I have nothing to give you. Go away! [TR:DIALOGUE_MOM_01]
+CHARACTER_NAME_DOG: Woof woof ! [TR:DIALOGUE_DOG_01]
+
+=> END
+~ other
+
+CHARACTER_NAME_MOM: ...

@@ -1,34 +1,33 @@
 class_name Mailbox
 
-extends Interactable
+extends Spatial
 
-onready var target_camera = get_node("Camera")
-onready var tween = get_node("%Tween") as Tween
+#var tween_values = [Vector3(-85, 90, -90), Vector3(-95, 90, -90)]
 
+var shake = 0.0015
+var shake_duration = 0.1
 
-func _ready():
-	connect("interacted", self, "_on_Mailbox_interacted")
+onready var tween = get_node("%ShakeTween") as Tween
+#onready var mailbox = get_node(".")
+onready var mailbox = get_node("Spatial")
 
-
-func _on_Mailbox_interacted(player, _item):
-	GameManager.set_game_mode(GameManager.GameMode.DETAILED_INTERACTION)
-
-	# Transform player camera to have a "detailed" interaction with the mailbox
-	var camera = player.get_node("Head/Camera")
-	zoom(camera, target_camera)
+#func _ready():
+#	start_tween()
 
 
-func zoom(camera_from: Camera, camera_to: Camera):
-	var transform_from := camera_from.global_transform
-	var transform_to := camera_to.global_transform
-	tween.interpolate_property(
-		camera_from,
-		"global_transform",
-		transform_from,
-		transform_to,
-		0.5,
-		Tween.TRANS_SINE,
-		Tween.EASE_IN_OUT
-	)
-	tween.start()
-	camera_to.current = true
+func _physics_process(_delta) -> void:
+	if GameManager.game_mode != GameManager.GameMode.DETAILED_INTERACTION:
+		return
+	
+	var input_axis = Input.get_vector("move_left", "move_right", "move_back", "move_forward")
+	var direction = Vector3(input_axis.x, 0.0, input_axis.y)
+	
+	if direction != Vector3.ZERO:
+		var shake_vector = Vector3(rand_range(0.0, shake), 0.0, rand_range(0.0, shake))
+		
+		tween.interpolate_property(mailbox, "translation", self.translation, direction * shake_vector, shake_duration)
+		tween.start()
+
+
+func _on_ShakeTween_completed(_object, _key):
+	pass

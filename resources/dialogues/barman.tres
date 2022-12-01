@@ -4,107 +4,315 @@
 
 [resource]
 script = ExtResource( 1 )
-resource_version = 3
+resource_version = 13
 syntax_version = 2
-raw_text = "~ start
+raw_text = "~ find_mom
 
-Nathan: This is some dialogue.
-Nathan: Here are some choices.
-- First one
-	Nathan: You picked the first one.
-- Second one
-	Nathan: You picked the second one.
-- Start again => start
-- End the conversation => END
-Nathan: For more information about conditional dialogue, mutations, and all the fun stuff, see the online documentation."
+CHARACTER_NAME_BARMAN: Can I get you anything ? [TR:DIALOGUE_BARMAN_01]
+CHARACTER_NAME_PLAYER:
+- No. [TR:DIALOGUE_PLAYER_02] => END
+
+~ what_choice
+
+CHARACTER_NAME_BARMAN: I need you to bring me some mailboxes! It's for a personal business... [TR:DIALOGUE_BARMAN_02]
+
+~ find_money
+
+CHARACTER_NAME_BARMAN: Can I get you anything ? [TR:DIALOGUE_BARMAN_01]
+CHARACTER_NAME_PLAYER:
+- I'm broke. Do you know how I can make money ? [TR:DIALOGUE_PLAYER_04] => what_choice
+- No. [TR:DIALOGUE_PLAYER_02] => END
+
+~ after_find_money
+
+CHARACTER_NAME_BARMAN: Watch your back, cops are lurking around here. Come here to hide if you need to ! [TR:DIALOGUE_BARMAN_03]
+
+~ steal_mailbox
+
+CHARACTER_NAME_BARMAN: Can I get you anything ? [TR:DIALOGUE_BARMAN_01]
+CHARACTER_NAME_PLAYER:
+- What should I do ? [TR:DIALOGUE_PLAYER_06] => what_choice
+- No. [TR:DIALOGUE_PLAYER_02] => END
+
+~ steal_mailbox_with_one_or_more_mailbox
+
+CHARACTER_NAME_BARMAN: Can I get you anything ? [TR:DIALOGUE_BARMAN_01]
+CHARACTER_NAME_PLAYER:
+- Take. [TR:DIALOGUE_PLAYER_07] => END
+	CHARACTER_NAME_BARMAN: After the effort, the comfort ! [TR:DIALOGUE_BARMAN_04]
+- What should I do ? [TR:DIALOGUE_PLAYER_06] => what_choice
+- No. [TR:DIALOGUE_PLAYER_02] => END
+
+~ steal_mailbox_with_last_mailbox
+
+CHARACTER_NAME_BARMAN: Can I get you anything ? [TR:DIALOGUE_BARMAN_01]
+CHARACTER_NAME_PLAYER:
+- Take. [TR:DIALOGUE_PLAYER_07] => END
+	CHARACTER_NAME_PLAYER: It was the last. [TR:DIALOGUE_BARMAN_08]
+	CHARACTER_NAME_BARMAN: You did deserve a little gift. [TR:CHARACTER_NAME_BARMAN]
+- No. [TR:DIALOGUE_PLAYER_02] => END"
 errors = [  ]
 titles = {
-"start": "2"
+"after_find_money": "19",
+"find_mom": "2",
+"find_money": "12",
+"steal_mailbox": "23",
+"steal_mailbox_with_last_mailbox": "39",
+"steal_mailbox_with_one_or_more_mailbox": "30",
+"what_choice": "8"
 }
 lines = {
 "0": {
 "next_id": "2",
-"text": "start",
+"text": "find_mom",
 "type": "title"
 },
 "10": {
-"character": "Nathan",
+"next_id": "12",
+"text": "find_money",
+"type": "title"
+},
+"12": {
+"character": "CHARACTER_NAME_BARMAN",
+"character_replacements": [  ],
+"next_id": "13",
+"replacements": [  ],
+"text": "Can I get you anything ?",
+"translation_key": "DIALOGUE_BARMAN_01",
+"type": "dialogue"
+},
+"13": {
+"character": "",
+"next_id": "14",
+"replacements": [  ],
+"text": "CHARACTER_NAME_PLAYER:",
+"translation_key": "CHARACTER_NAME_PLAYER:",
+"type": "dialogue"
+},
+"14": {
+"next_id": "8",
+"next_id_after": "end!",
+"replacements": [  ],
+"responses": PoolStringArray( "14", "15" ),
+"text": "I'm broke. Do you know how I can make money ?",
+"translation_key": "DIALOGUE_PLAYER_04",
+"type": "response"
+},
+"15": {
+"next_id": "end",
+"next_id_after": "end!",
+"replacements": [  ],
+"text": "No.",
+"translation_key": "DIALOGUE_PLAYER_02",
+"type": "response"
+},
+"17": {
+"next_id": "19",
+"text": "after_find_money",
+"type": "title"
+},
+"19": {
+"character": "CHARACTER_NAME_BARMAN",
 "character_replacements": [  ],
 "next_id": "",
 "replacements": [  ],
-"text": "For more information about conditional dialogue, mutations, and all the fun stuff, see the online documentation.",
-"translation_key": "For more information about conditional dialogue, mutations, and all the fun stuff, see the online documentation.",
+"text": "Watch your back, cops are lurking around here. Come here to hide if you need to !",
+"translation_key": "DIALOGUE_BARMAN_03",
 "type": "dialogue"
 },
 "2": {
-"character": "Nathan",
+"character": "CHARACTER_NAME_BARMAN",
 "character_replacements": [  ],
 "next_id": "3",
 "replacements": [  ],
-"text": "This is some dialogue.",
-"translation_key": "This is some dialogue.",
+"text": "Can I get you anything ?",
+"translation_key": "DIALOGUE_BARMAN_01",
 "type": "dialogue"
 },
-"3": {
-"character": "Nathan",
+"21": {
+"next_id": "23",
+"text": "steal_mailbox",
+"type": "title"
+},
+"23": {
+"character": "CHARACTER_NAME_BARMAN",
 "character_replacements": [  ],
+"next_id": "24",
+"replacements": [  ],
+"text": "Can I get you anything ?",
+"translation_key": "DIALOGUE_BARMAN_01",
+"type": "dialogue"
+},
+"24": {
+"character": "",
+"next_id": "25",
+"replacements": [  ],
+"text": "CHARACTER_NAME_PLAYER:",
+"translation_key": "CHARACTER_NAME_PLAYER:",
+"type": "dialogue"
+},
+"25": {
+"next_id": "8",
+"next_id_after": "end!",
+"replacements": [  ],
+"responses": PoolStringArray( "25", "26" ),
+"text": "What should I do ?",
+"translation_key": "DIALOGUE_PLAYER_06",
+"type": "response"
+},
+"26": {
+"next_id": "end",
+"next_id_after": "end!",
+"replacements": [  ],
+"text": "No.",
+"translation_key": "DIALOGUE_PLAYER_02",
+"type": "response"
+},
+"28": {
+"next_id": "30",
+"text": "steal_mailbox_with_one_or_more_mailbox",
+"type": "title"
+},
+"3": {
+"character": "",
 "next_id": "4",
 "replacements": [  ],
-"text": "Here are some choices.",
-"translation_key": "Here are some choices.",
+"text": "CHARACTER_NAME_PLAYER:",
+"translation_key": "CHARACTER_NAME_PLAYER:",
+"type": "dialogue"
+},
+"30": {
+"character": "CHARACTER_NAME_BARMAN",
+"character_replacements": [  ],
+"next_id": "31",
+"replacements": [  ],
+"text": "Can I get you anything ?",
+"translation_key": "DIALOGUE_BARMAN_01",
+"type": "dialogue"
+},
+"31": {
+"character": "",
+"next_id": "32",
+"replacements": [  ],
+"text": "CHARACTER_NAME_PLAYER:",
+"translation_key": "CHARACTER_NAME_PLAYER:",
+"type": "dialogue"
+},
+"32": {
+"next_id": "end",
+"next_id_after": "end!",
+"replacements": [  ],
+"responses": PoolStringArray( "32", "34", "35" ),
+"text": "Take.",
+"translation_key": "DIALOGUE_PLAYER_07",
+"type": "response"
+},
+"33": {
+"character": "CHARACTER_NAME_BARMAN",
+"character_replacements": [  ],
+"next_id": "end!",
+"parent_id": "32",
+"replacements": [  ],
+"text": "After the effort, the comfort !",
+"translation_key": "DIALOGUE_BARMAN_04",
+"type": "dialogue"
+},
+"34": {
+"next_id": "8",
+"next_id_after": "end!",
+"replacements": [  ],
+"text": "What should I do ?",
+"translation_key": "DIALOGUE_PLAYER_06",
+"type": "response"
+},
+"35": {
+"next_id": "end",
+"next_id_after": "end!",
+"replacements": [  ],
+"text": "No.",
+"translation_key": "DIALOGUE_PLAYER_02",
+"type": "response"
+},
+"37": {
+"next_id": "39",
+"text": "steal_mailbox_with_last_mailbox",
+"type": "title"
+},
+"39": {
+"character": "CHARACTER_NAME_BARMAN",
+"character_replacements": [  ],
+"next_id": "40",
+"replacements": [  ],
+"text": "Can I get you anything ?",
+"translation_key": "DIALOGUE_BARMAN_01",
 "type": "dialogue"
 },
 "4": {
-"next_id": "5",
-"next_id_after": "10",
+"next_id": "end",
+"next_id_after": "end!",
 "replacements": [  ],
-"responses": PoolStringArray( "4", "6", "8", "9" ),
-"text": "First one",
-"translation_key": "First one",
+"responses": PoolStringArray( "4" ),
+"text": "No.",
+"translation_key": "DIALOGUE_PLAYER_02",
 "type": "response"
 },
-"5": {
-"character": "Nathan",
-"character_replacements": [  ],
-"next_id": "10",
-"parent_id": "4",
+"40": {
+"character": "",
+"next_id": "41",
 "replacements": [  ],
-"text": "You picked the first one.",
-"translation_key": "You picked the first one.",
+"text": "CHARACTER_NAME_PLAYER:",
+"translation_key": "CHARACTER_NAME_PLAYER:",
 "type": "dialogue"
+},
+"41": {
+"next_id": "end",
+"next_id_after": "end!",
+"replacements": [  ],
+"responses": PoolStringArray( "41", "44" ),
+"text": "Take.",
+"translation_key": "DIALOGUE_PLAYER_07",
+"type": "response"
+},
+"42": {
+"character": "CHARACTER_NAME_PLAYER",
+"character_replacements": [  ],
+"next_id": "43",
+"parent_id": "41",
+"replacements": [  ],
+"text": "It was the last.",
+"translation_key": "DIALOGUE_BARMAN_08",
+"type": "dialogue"
+},
+"43": {
+"character": "CHARACTER_NAME_BARMAN",
+"character_replacements": [  ],
+"next_id": "end!",
+"parent_id": "41",
+"replacements": [  ],
+"text": "You did deserve a little gift.",
+"translation_key": "CHARACTER_NAME_BARMAN",
+"type": "dialogue"
+},
+"44": {
+"next_id": "end",
+"next_id_after": "end!",
+"replacements": [  ],
+"text": "No.",
+"translation_key": "DIALOGUE_PLAYER_02",
+"type": "response"
 },
 "6": {
-"next_id": "7",
-"next_id_after": "10",
-"replacements": [  ],
-"text": "Second one",
-"translation_key": "Second one",
-"type": "response"
-},
-"7": {
-"character": "Nathan",
-"character_replacements": [  ],
-"next_id": "10",
-"parent_id": "6",
-"replacements": [  ],
-"text": "You picked the second one.",
-"translation_key": "You picked the second one.",
-"type": "dialogue"
+"next_id": "8",
+"text": "what_choice",
+"type": "title"
 },
 "8": {
-"next_id": "2",
-"next_id_after": "10",
+"character": "CHARACTER_NAME_BARMAN",
+"character_replacements": [  ],
+"next_id": "",
 "replacements": [  ],
-"text": "Start again",
-"translation_key": "Start again",
-"type": "response"
-},
-"9": {
-"next_id": "end",
-"next_id_after": "10",
-"replacements": [  ],
-"text": "End the conversation",
-"translation_key": "End the conversation",
-"type": "response"
+"text": "I need you to bring me some mailboxes! It's for a personal business...",
+"translation_key": "DIALOGUE_BARMAN_02",
+"type": "dialogue"
 }
 }

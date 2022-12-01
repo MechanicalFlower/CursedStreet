@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/models/sidewalk.material" type="Material" id=1]
+[ext_resource path="res://assets/models/sidewalk_001.material" type="Material" id=2]
+[ext_resource path="res://assets/models/road.material" type="Material" id=3]
+[ext_resource path="res://assets/materials/grid.material" type="Material" id=4]
+[ext_resource path="res://assets/new_models/hedge/misc_models/fences/fence2_01.fbx" type="PackedScene" id=5]
+[ext_resource path="res://assets/new_models/hedge/misc_models/flowers/flowerbed1_1x2.fbx" type="PackedScene" id=6]
+[ext_resource path="res://assets/new_models/hedge/misc_models/fences/fence1_single_gate.fbx" type="PackedScene" id=7]
+[ext_resource path="res://assets/new_models/hedge/misc_models/stone/fountain01_square_water.fbx" type="PackedScene" id=8]
+[ext_resource path="res://assets/new_models/hedge/misc_models/stone/bench01.fbx" type="PackedScene" id=9]
+[ext_resource path="res://assets/new_models/hedge/modular_hedge/basic/basic_3x2.fbx" type="PackedScene" id=10]
+
+[sub_resource type="Curve3D" id=1]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -116.576, -3.22174, -27.3964, 0, 0, 0, 0, 0, 0, -92.494, -5.81848, -7.61334, 0, 0, 0, 0, 0, 0, -60.0968, -6.02263, -5.02157, 0, 0, 0, 0, 0, 0, -39.7086, -2.34781, 22.9677, 0, 0, 0, 0, 0, 0, 3.36859, -1.12286, 35.2171, 0, 0, 0, 0, 0, 0, 40.0105, 2.48564, 18.6284, 0, 0, 0, 0, 0, 0, 53.9413, 2.48564, -6.31745, 0, 0, 0, 0, 0, 0, 68.5854, 2.48564, -25.507, 0, 0, 0, 0, 0, 0, 105.453, 2.48564, -28.9955, 0, 0, 0, 0, 0, 0, 121.651, 2.48564, -19.9243, 0, 0, 0, 0, 0, 0, 130.399, 2.48564, -0.161985, 0, 0, 0, 0, 0, 0, 133.314, 2.48564, 20.2482, 0, 0, 0, 0, 0, 0, 149.837, 2.48564, 39.3626, 0, 0, 0, 0, 0, 0, 148.541, 2.48564, 67.8721, 0, 0, 0, 0, 0, 0, 128.131, 2.48564, 84.7186, 0, 0, 0, 0, 0, 0, 98.9734, 2.48564, 95.4097, 0, 0, 0, 0, 0, 0, 73.9829, 4.31421, 101.194, 0, 0, 0, 0, 0, 0, 31.5551, 4.49727, 93.6768, 0, 0, 0, 0, 0, 0, -15.9868, 5.78211, 94.2727 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
+}
+
+[node name="Node" type="Node"]
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="Road" type="Node" parent="Terrain"]
+
+[node name="Path" type="Path" parent="Terrain/Road"]
+curve = SubResource( 1 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Terrain/Road"]
+use_collision = true
+
+[node name="Road" type="CSGPolygon" parent="Terrain/Road/CSGCombiner"]
+polygon = PoolVector2Array( -3, 0, -3, 0.1, 3, 0.1, 3, 0 )
+mode = 2
+path_node = NodePath("../../Path")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 1.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource( 3 )
+
+[node name="LeftSideWalk" type="CSGPolygon" parent="Terrain/Road/CSGCombiner"]
+polygon = PoolVector2Array( 3, 0, 3, 0.1, 4, 0.1, 4, 0 )
+mode = 2
+path_node = NodePath("../../Path")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 1.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource( 2 )
+
+[node name="RightSideWalk" type="CSGPolygon" parent="Terrain/Road/CSGCombiner"]
+polygon = PoolVector2Array( -4, 0, -4, 0.1, -3, 0.1, -3, 0 )
+mode = 2
+path_node = NodePath("../../Path")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 1.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource( 1 )
+
+[node name="LeftGround" type="CSGPolygon" parent="Terrain/Road/CSGCombiner"]
+polygon = PoolVector2Array( 4, 0, 4, 0.1, 20, 0.1, 20, 0 )
+mode = 2
+path_node = NodePath("../../Path")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 1.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource( 4 )
+
+[node name="RightGround" type="CSGPolygon" parent="Terrain/Road/CSGCombiner"]
+polygon = PoolVector2Array( -4, 0, -4, 0.1, -20, 0.1, -20, 0 )
+mode = 2
+path_node = NodePath("../../Path")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 1.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource( 4 )
+
+[node name="basic_3x2" parent="Terrain/Road/CSGCombiner" instance=ExtResource( 10 )]
+transform = Transform( -0.078028, 0, -2.6711, 0, 2.67224, 0, 2.6711, 0, -0.078028, -11.0149, -1.7748, 20.7418 )
+
+[node name="basic_3x3" parent="Terrain/Road/CSGCombiner" instance=ExtResource( 10 )]
+transform = Transform( -0.0820216, 0, -2.80782, 0, 2.80901, 0, 2.80782, 0, -0.0820216, -10.7466, -2.20089, 11.4001 )
+
+[node name="flowerbed1_1x2" parent="Terrain/Road/CSGCombiner" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.82891, -1.41142, 24.4661 )
+
+[node name="flowerbed1_1x3" parent="Terrain/Road/CSGCombiner" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.96424, -1.23686, 24.5975 )
+
+[node name="flowerbed1_1x4" parent="Terrain/Road/CSGCombiner" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24127, -1.08949, 24.3301 )
+
+[node name="City" type="Node" parent="."]
+
+[node name="Nature" type="Node" parent="."]
+
+[node name="fence2_01" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3.7975, 0, 0, 0, 3.7975, 0, 0, 0, 3.7975, -8.16555, -1.37811, 25.5885 )
+
+[node name="fence2_02" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3.7975, 0, 0, 0, 3.7975, 0, 0, 0, 3.7975, -3.67365, -1.10237, 25.8373 )
+
+[node name="fence2_03" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3.7975, 0, 0, 0, 3.7975, 0, 0, 0, 3.7975, 0.315206, -0.864304, 25.9147 )
+
+[node name="fence2_04" parent="." instance=ExtResource( 5 )]
+transform = Transform( 3.7975, 0, 0, 0, 3.7975, 0, 0, 0, 3.7975, 4.06538, -0.642893, 25.9365 )
+
+[node name="fence1_single_gate" parent="." instance=ExtResource( 7 )]
+transform = Transform( 4.32608, 0, 0, 0, 4.32608, 0, 0, 0, 4.32608, 8.01623, -0.423963, 25.6566 )
+
+[node name="bench01" parent="." instance=ExtResource( 9 )]
+transform = Transform( 2.59374, 0, 0, 0, 2.59374, 0, 0, 0, 2.59374, 3.52984, -0.76119, 24.1009 )
+
+[node name="fountain01_square_water" parent="." instance=ExtResource( 8 )]
+transform = Transform( 2.44196, 0, 0, 0, 2.44196, 0, 0, 0, 2.44196, -2.46646, -1.40205, 17.3422 )

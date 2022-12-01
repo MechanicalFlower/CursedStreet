@@ -22,6 +22,9 @@ onready var floor_max_angle: float = deg2rad(45.0)
 onready var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * gravity_multiplier
 
 
+func _ready():
+	GameManager.connect("game_mode_changed", self, "_on_game_mode_changed")
+
 # Called every physics tick. 'delta' is constant
 func _physics_process(delta) -> void:
 	if GameManager.game_mode == GameManager.GameMode.DETAILED_INTERACTION:
@@ -92,3 +95,7 @@ func accelerate(delta: float) -> void:
 
 	velocity.x = temp_vel.x
 	velocity.z = temp_vel.z
+
+func _on_game_mode_changed(new_game_mode):
+	var is_exploring = new_game_mode == GameManager.GameMode.EXPLORING
+	set_physics_process(is_exploring)
