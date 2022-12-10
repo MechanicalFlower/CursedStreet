@@ -36,11 +36,11 @@ func _enter_tree():
 func _exit_tree():
 	_tree.disconnect("cell_selected", self, "file_picked")
 
-	if _current_item != null and is_instance_valid(_current_item):
+	if is_instance_valid(_current_item):
 		_current_item.free()
 		_current_item = null
 
-	if _dock != null and is_instance_valid(_dock):
+	if is_instance_valid(_dock):
 		remove_control_from_container(CONTAINER_SPATIAL_EDITOR_MENU, _dock)
 
 		var button := _dock.get_node("Button") as Button
@@ -81,7 +81,7 @@ func toggle_painting():
 	var button := _dock.get_node("Button") as Button
 	painting = !painting
 	if !painting:
-		if _current_item != null and is_instance_valid(_current_item):
+		if is_instance_valid(_current_item):
 			_current_item.free()
 			_current_item = null
 		button.pressed = false
@@ -91,7 +91,7 @@ func toggle_painting():
 
 
 func forward_spatial_gui_input(camera: Camera, event: InputEvent):
-	if !painting or _current_item == null or not is_instance_valid(_current_item):
+	if !painting or not is_instance_valid(_current_item):
 		return false
 
 	if event is InputEventMouseMotion:
@@ -156,7 +156,7 @@ func handles(_object):
 
 
 func file_picked():
-	if _current_item != null and is_instance_valid(_current_item):
+	if is_instance_valid(_current_item):
 		_current_item.free()
 		_current_item = null
 
@@ -186,15 +186,18 @@ func set_up_temp_object() -> void:
 			_current_item.set_name("TEMPORARY OBJECT")
 
 
+func apply_material(parent: Node, material: Material):
+	if parent is MeshInstance:
+		parent.set_material_override(material)
+
+	for child in parent.get_children():
+		apply_material(child, material)
+
+
 func add_temp_item(resource: PackedScene) -> Spatial:
 	var new_item := resource.instance() as Spatial
+	apply_material(new_item, TempObjectMat)
 	get_editor_interface().get_edited_scene_root().add_child(new_item)
-	if new_item is MeshInstance:
-		new_item.material_override = TempObjectMat
-	else:
-		for c in new_item.get_children():
-			if c is MeshInstance:
-				c.material_override = TempObjectMat
 	return new_item
 
 
