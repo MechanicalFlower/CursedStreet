@@ -1,0 +1,47 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/procedural_city/l_system.gd" type="Script" id=1]
+[ext_resource path="res://scripts/procedural_city/road.gd" type="Script" id=2]
+[ext_resource path="res://scripts/procedural_city/building.gd" type="Script" id=3]
+[ext_resource path="res://scripts/procedural_city/visualizer.gd" type="Script" id=4]
+[ext_resource path="res://resources/procedural_city/house1_tex1.tres" type="Resource" id=5]
+[ext_resource path="res://scenes/prototype/tree/tiny_tree01.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/procedural_city/roads/road_intersection.tscn" type="PackedScene" id=7]
+[ext_resource path="res://resources/procedural_city/house1_tex2.tres" type="Resource" id=8]
+[ext_resource path="res://scenes/prototype/tree/tiny_tree02.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/procedural_city/roads/road_curve.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/procedural_city/roads/road_endRound.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/procedural_city/roads/road_straight.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/procedural_city/roads/road_crossroad.tscn" type="PackedScene" id=13]
+
+[node name="City" type="Spatial"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+
+[node name="LSystem" type="Node" parent="."]
+script = ExtResource( 1 )
+variables = PoolStringArray( "F", "X" )
+constants = PoolStringArray( "+", "-", "[", "]" )
+start = "X"
+rules = [ PoolStringArray( "X", "F+[[X]-X]-F[-FX]+X" ), PoolStringArray( "F", "FF" ) ]
+iteration_limit = 2
+
+[node name="ProcCityBuilding" type="Node" parent="."]
+script = ExtResource( 3 )
+building_types = [ ExtResource( 5 ), ExtResource( 8 ) ]
+nature_nodes = [ ExtResource( 6 ), ExtResource( 9 ) ]
+random_nature_placement = true
+random_nature_placement_treshold = 0.091
+
+[node name="ProcCityRoad" type="Node" parent="."]
+script = ExtResource( 2 )
+road_straight = ExtResource( 12 )
+road_end = ExtResource( 11 )
+road_corner = ExtResource( 10 )
+road_3_way = ExtResource( 7 )
+road_4_way = ExtResource( 13 )
+
+[node name="Visualizer" type="Node" parent="."]
+script = ExtResource( 4 )
+lsystem_path = NodePath("../LSystem")
+road_path = NodePath("../ProcCityRoad")
+structure_path = NodePath("../ProcCityBuilding")

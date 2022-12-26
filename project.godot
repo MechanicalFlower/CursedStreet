@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "BuildingResource",
+"language": "GDScript",
+"path": "res://scripts/procedural_city/building_resource.gd"
+}, {
+"base": "Resource",
 "class": "DialogueResource",
 "language": "GDScript",
 "path": "res://addons/dialogue_manager/dialogue_resource.gd"
@@ -23,6 +28,11 @@ _global_script_classes=[ {
 "class": "Interactable",
 "language": "GDScript",
 "path": "res://scripts/interactable.gd"
+}, {
+"base": "Node",
+"class": "LSystem",
+"language": "GDScript",
+"path": "res://scripts/procedural_city/l_system.gd"
 }, {
 "base": "Spatial",
 "class": "Mailbox",
@@ -39,18 +49,38 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/player/head.gd"
 }, {
+"base": "Node",
+"class": "ProcCityBuilding",
+"language": "GDScript",
+"path": "res://scripts/procedural_city/building.gd"
+}, {
+"base": "Node",
+"class": "ProcCityRoad",
+"language": "GDScript",
+"path": "res://scripts/procedural_city/road.gd"
+}, {
+"base": "Camera",
+"class": "RotationCamera",
+"language": "GDScript",
+"path": "res://addons/turntable/rotation_camera.gd"
+}, {
 "base": "Spatial",
 "class": "Train",
 "language": "GDScript",
 "path": "res://scripts/train.gd"
 } ]
 _global_script_class_icons={
+"BuildingResource": "",
 "DialogueResource": "",
 "InteractMailbox": "",
 "Interactable": "",
+"LSystem": "",
 "Mailbox": "",
 "MovementController": "",
 "PlayerHead": "",
+"ProcCityBuilding": "",
+"ProcCityRoad": "",
+"RotationCamera": "",
 "Train": ""
 }
 
@@ -69,6 +99,7 @@ default_bus_layout="res://resources/default_bus_layout.tres"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameManager="*res://scripts/framework/game_manager.gd"
 SettingsManager="*res://scripts/framework/settings_manager.gd"
+TurntableManager="*res://addons/turntable/turntable_manager.gd"
 
 [display]
 
@@ -77,7 +108,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/brush/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/brush/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/turntable/plugin.cfg" )
 
 [global]
 

@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Curve3D" id=2]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -12.769, 0.44545, -5.92883, 0, 0, 0, 0, 0, 0, -6.85634, -0.459357, -2.32651, 0, 0, 0, 0, 0, 0, -2.19471, -1.61626, 0.182266, 0, 0, 0, 0, 0, 0, 3.13804, -0.315858, 1.76784, 0, 0, 0, 0, 0, 0, 4.75908, 0.950263, 8.15178, 0, 0, 0, 0, 0, 0, 4.81589, 2.99145, 13.1119 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
+up_vector_enabled = false
+
+[sub_resource type="Curve3D" id=1]
+bake_interval = 0.1
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 6.35252, -2.06751, 7.4304, 0, 0, 0, 0, 0, 0, 4.81589, 2.99145, 13.1119, 0, 0, 0, 0, 0, 0, -4.12919, -1.47464, -4.1418 ),
+"tilts": PoolRealArray( 0, 0, 0 )
+}
+up_vector_enabled = false
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Path" type="Path" parent="."]
+curve = SubResource( 2 )
+
+[node name="Path2" type="Path" parent="."]
+curve = SubResource( 1 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+
+[node name="CSGPolygon" type="CSGPolygon" parent="CSGCombiner"]
+polygon = PoolVector2Array( -1, 0, -1, 0.25, 1, 0.25, 1, 0 )
+mode = 2
+path_node = NodePath("../../Path")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="CSGCombiner"]
+polygon = PoolVector2Array( -1, 0, -1, 0.25, 1, 0.25, 1, 0 )
+mode = 2
+path_node = NodePath("../../Path2")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
