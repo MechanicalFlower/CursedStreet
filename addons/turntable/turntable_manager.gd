@@ -1,54 +1,50 @@
 extends Node
 
-const RotationCamera = preload("res://addons/turntable/rotation_camera.gd")
+const TurntableCamera = preload("res://addons/turntable/turntable_camera.gd")
 
 
 func _ready():
+	# Wait until all the nodes are ready before continuing
 	yield(get_tree().get_root(), "ready")
-	
-	var world_aabb = null
-	
-	# Check if there is already a camera in the scene
-	var all_children = get_all_children(get_tree().get_root())
+
+	# Create a empty AABB
+	var world_aabb := AABB(Vector3.ZERO, Vector3.ZERO)
+
+	# Retrieve all children of the root node and store them in an array
+	var all_children := get_all_children(get_tree().get_root())
+
+	# Iterate over all the objects in the scene
 	for child in all_children:
+
+		# Check if there is already a camera in the scene
 		if child is Camera:
+			# If yes, no need to continue
 			return
+
+		# Check if the node is a VisualInstance
 		if child.is_class("VisualInstance"):
-			var position = to_full_global(child, child.get_aabb().position)
-			var end = to_full_global(child, child.get_aabb().end)
-			
-			if world_aabb == null:
-				world_aabb = AABB(position, end - position)
-			else:
-				world_aabb.expand(position)
-				world_aabb.expand(end)
-	
-	if world_aabb != null:
-		# If there is no camera, create a new one and add it to the scene
-		var camera = RotationCamera.new()
-		get_tree().get_root().call_deferred("add_child", camera)
-		camera.name = "camera"
-		
-		camera.target = world_aabb.get_center()
-		print(camera.target)
-		
-		camera.radius = world_aabb.size.y
-		print(camera.radius)
+			var aabb := child.get_aabb() as AABB
+
+			# Convert coordinate to world space
+			var transform = child.get_global_transform()
+			var position = transform.xform(aabb.position)
+			var end = transform.xform(aabb.end)
+
+			# Expand the AABB
+			world_aabb = world_aabb.expand(position)
+			world_aabb = world_aabb.expand(end)
+
+	# If there is no camera, create a new one and add it to the scene
+	var camera := TurntableCamera.new()
+	camera.target_point = world_aabb.get_center()
+	get_tree().get_root().call_deferred("add_child", camera)
 
 
-func get_all_children(in_node: Node, arr := []):
+func get_all_children(in_node: Node, arr := []) -> Array:
+	"""
+	Recursively retrieves all children of a given Node and stores them in an array.
+	"""
 	arr.push_back(in_node)
 	for child in in_node.get_children():
 		arr = get_all_children(child, arr)
 	return arr
-
-
-func to_full_global(node: Node, point: Vector3):
-	var parent := node.get_parent()
-	if not is_instance_valid(parent) or parent == get_tree().get_root():
-		return point
-
-	if parent.is_class("Spatial"):
-		point = parent.to_global(point)
-
-	return to_full_global(parent, point)

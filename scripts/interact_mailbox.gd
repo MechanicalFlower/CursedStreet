@@ -20,33 +20,33 @@ func _ready():
 func _process(_delta):
 	if GameManager.game_mode != GameManager.GameMode.DETAILED_INTERACTION:
 		return
-	
+
 	if Input.is_action_just_pressed("ui_cancel") and _zoomed_player != null and _zoomed_player_head != null:
-		
+
 		player_zoom(_initial_player_transform, _initial_player_head_rotation)
-		
+
 		GameManager.set_game_mode(GameManager.GameMode.EXPLORING)
-		
+
 		_zoomed_player = null
 		_zoomed_player_head = null
 
 
 func _on_Mailbox_interacted(player, _item):
 	GameManager.set_game_mode(GameManager.GameMode.DETAILED_INTERACTION)
-	
+
 	var player_head = player.get_node("Head")
-	
+
 	_zoomed_player = player
 	_zoomed_player_head = player_head
 	_initial_player_transform = _zoomed_player.global_transform
 	_initial_player_head_rotation = _zoomed_player_head.rot
-	
+
 	# Transform player head to have a "detailed" interaction with the mailbox
 	player_zoom(target_player.global_transform, target_player.rotation)
 
 
 func player_zoom(transform_to: Transform, rotation_to: Vector3):
-	
+
 	# move player to the player_point_target
 	tween.interpolate_property(
 		_zoomed_player,
@@ -57,7 +57,7 @@ func player_zoom(transform_to: Transform, rotation_to: Vector3):
 		Tween.TRANS_SINE,
 		Tween.EASE_IN_OUT
 	)
-	
+
 	# and update his rotation head with set_rot, to ensure no cut after interaction
 	tween.interpolate_method(
 		_zoomed_player_head,
@@ -68,5 +68,5 @@ func player_zoom(transform_to: Transform, rotation_to: Vector3):
 		Tween.TRANS_SINE,
 		Tween.EASE_IN_OUT
 	)
-	
+
 	tween.start()

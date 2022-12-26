@@ -18,13 +18,13 @@ onready var mailbox = get_node("Spatial")
 func _physics_process(_delta) -> void:
 	if GameManager.game_mode != GameManager.GameMode.DETAILED_INTERACTION:
 		return
-	
+
 	var input_axis = Input.get_vector("move_left", "move_right", "move_back", "move_forward")
 	var direction = Vector3(input_axis.x, 0.0, input_axis.y)
-	
+
 	if direction != Vector3.ZERO:
 		var shake_vector = Vector3(rand_range(0.0, shake), 0.0, rand_range(0.0, shake))
-		
+
 		tween.interpolate_property(mailbox, "translation", self.translation, direction * shake_vector, shake_duration)
 		tween.start()
 

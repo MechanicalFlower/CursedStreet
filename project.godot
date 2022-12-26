@@ -59,15 +59,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/procedural_city/road.gd"
 }, {
-"base": "Camera",
-"class": "RotationCamera",
-"language": "GDScript",
-"path": "res://addons/turntable/rotation_camera.gd"
-}, {
 "base": "Spatial",
 "class": "Train",
 "language": "GDScript",
 "path": "res://scripts/train.gd"
+}, {
+"base": "Camera",
+"class": "TurntableCamera",
+"language": "GDScript",
+"path": "res://addons/turntable/turntable_camera.gd"
 } ]
 _global_script_class_icons={
 "BuildingResource": "",
@@ -80,8 +80,8 @@ _global_script_class_icons={
 "PlayerHead": "",
 "ProcCityBuilding": "",
 "ProcCityRoad": "",
-"RotationCamera": "",
-"Train": ""
+"Train": "",
+"TurntableCamera": ""
 }
 
 [application]
@@ -100,6 +100,7 @@ DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GameManager="*res://scripts/framework/game_manager.gd"
 SettingsManager="*res://scripts/framework/settings_manager.gd"
 TurntableManager="*res://addons/turntable/turntable_manager.gd"
+Helper="*res://scripts/framework/helper.gd"
 
 [display]
 

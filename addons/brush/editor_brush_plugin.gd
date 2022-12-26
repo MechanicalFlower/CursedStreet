@@ -134,14 +134,14 @@ func forward_spatial_gui_input(camera: Camera, event: InputEvent):
 		undo_redo.commit_action()
 		return true
 
-	elif event is InputEventMouse and event.button_index == BUTTON_WHEEL_DOWN:
+	elif event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_DOWN:
 		if Input.is_physical_key_pressed(KEY_SHIFT):
 			return false
 
 		_current_item.scale = _current_item.scale * 0.9
 		return true
 
-	elif event is InputEventMouse and event.button_index == BUTTON_WHEEL_UP:
+	elif event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_UP:
 		if Input.is_physical_key_pressed(KEY_SHIFT):
 			return false
 

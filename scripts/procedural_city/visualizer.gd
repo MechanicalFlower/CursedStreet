@@ -4,7 +4,7 @@ class Agent:
 	var position: Vector3
 	var direction: Vector3
 	var length: int
-	
+
 	func _init(position_: Vector3, direction_: Vector3, length_: int):
 		position = position_
 		direction = direction_
@@ -27,20 +27,20 @@ func _ready():
 
 	var lsystem = get_node(lsystem_path) as LSystem
 	var sequence = lsystem.generate_sentence()
-	
+
 	print("sequence:", sequence)
-	
+
 	visualize_sequence(sequence)
 
 
 func visualize_sequence(sequence: String):
 	var ANGLE := 90
-	
+
 	var save_points := []
-	
+
 	var current_position := Vector3.ZERO
 	var direction := Vector3.FORWARD
-	
+
 	for letter in sequence:
 		match letter:
 			'[':

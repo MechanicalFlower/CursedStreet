@@ -27,10 +27,10 @@ func _ready():
 func generate_sentence(word: String = '') -> String:
 	if not word:
 		word = start
-	
+
 	for i in range(iteration_limit):
 		word = grow_recursive(word)
-	
+
 	return word
 
 
